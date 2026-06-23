@@ -1,9 +1,12 @@
+import PrimaryButton from "@/components/PrimaryButton";
+import { images } from "@/constants/images";
+import { useRouter } from "expo-router";
 import { Image, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { TouchableOpacity } from "react-native";
-import { images } from "@/constants/images";
 
 export default function OnboardingScreen() {
+  const router = useRouter();
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#ffffff" }}>
       <View className="flex-1 items-center px-6 pt-8">
@@ -41,7 +44,7 @@ export default function OnboardingScreen() {
                 Hello!
               </Text>
             </View>
-            <View className="w-0 h-0 border-l-8 border-r-8 border-t-[10px] border-l-transparent border-r-transparent border-t-gray-50 self-end mr-4" />
+            <View className="w-0 h-0 border-l-8 border-r-8 border-t-10 border-l-transparent border-r-transparent border-t-gray-50 self-end mr-4" />
           </View>
 
           {/* Hola bubble - top right, slight clockwise tilt */}
@@ -51,12 +54,12 @@ export default function OnboardingScreen() {
                 ¡Hola!
               </Text>
             </View>
-            <View className="w-0 h-0 border-l-8 border-r-8 border-t-[10px] border-l-transparent border-r-transparent border-t-blue-50 self-start ml-4" />
+            <View className="w-0 h-0 border-l-8 border-r-8 border-t-10 border-l-transparent border-r-transparent border-t-blue-50 self-start ml-4" />
           </View>
 
           {/* 你好 bubble - mid right, below Hola, above mascot hand */}
           <View className="absolute right-4 top-[38%] z-10 rotate-3">
-            <View className="w-0 h-0 border-l-8 border-r-8 border-b-[10px] border-l-transparent border-r-transparent border-b-red-50 self-start ml-5" />
+            <View className="w-0 h-0 border-l-8 border-r-8 border-b-10 border-l-transparent border-r-transparent border-b-red-50 self-start ml-5" />
             <View className="bg-red-50 rounded-2xl px-5 py-2.5 shadow-md">
               <Text className="text-body-lg font-poppins-bold text-red-500">
                 你好!
@@ -75,12 +78,10 @@ export default function OnboardingScreen() {
 
       {/* Get Started Button */}
       <View className="px-6 pb-8">
-        <TouchableOpacity className="bg-purple rounded-2xl py-4 flex-row items-center justify-center">
-          <Text className="text-white text-h3 font-poppins-semibold mr-2">
-            Get Started
-          </Text>
-          <Text className="text-white text-h3">{">"}</Text>
-        </TouchableOpacity>
+        <PrimaryButton
+          title="Get Started"
+          onPress={() => router.push("/(auth)/sign-up")}
+        />
       </View>
     </SafeAreaView>
   );

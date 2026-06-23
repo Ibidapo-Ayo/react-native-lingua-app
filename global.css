@@ -133,3 +133,38 @@
   border-radius: 16px;
   padding: 16px;
 }
+
+/* Auth input field */
+@utility auth-input {
+  background-color: var(--color-surface);
+  border-width: 1px;
+  border-color: var(--color-border);
+  border-radius: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+/* Auth social button */
+@utility auth-social-btn {
+  flex-direction: row;
+  align-items: center;
+  border-width: 1px;
+  border-color: var(--color-border);
+  border-radius: 16px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Primary action button */
+@utility btn-primary {
+  background-color: var(--color-purple);
+  border-radius: 16px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  align-items: center;
+  justify-content: center;
+}
