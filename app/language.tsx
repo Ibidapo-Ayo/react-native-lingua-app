@@ -1,5 +1,6 @@
 import { images } from "@/constants/images";
 import { SUPPORTED_LANGUAGES } from "@/data/languages";
+import { useLanguageStore } from "@/store/language-store";
 import type { SupportedLanguage } from "@/types/learning";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
@@ -40,10 +41,8 @@ function getFlagImageUri(flagCode: string): string {
 export default function LanguageScreen() {
   const router = useRouter();
   const { width: screenWidth } = useWindowDimensions();
+  const { selectedLanguageId, setSelectedLanguageId } = useLanguageStore();
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedLanguageId, setSelectedLanguageId] = useState<
-    SupportedLanguage["id"]
-  >(SUPPORTED_LANGUAGES[0]?.id ?? "");
   const earthImageHeight = Math.min(
     Math.round(screenWidth * EARTH_IMAGE_HEIGHT_RATIO),
     220,
@@ -52,6 +51,7 @@ export default function LanguageScreen() {
 
   const handleLanguageSelect = (languageId: SupportedLanguage["id"]) => {
     setSelectedLanguageId(languageId);
+    router.replace("/");
   };
 
   const visibleLanguages = useMemo(() => {
