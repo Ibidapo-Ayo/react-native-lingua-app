@@ -1,11 +1,21 @@
 import PrimaryButton from "@/components/PrimaryButton";
 import { images } from "@/constants/images";
-import { useRouter } from "expo-router";
+import { useAuth } from "@clerk/clerk-expo";
+import { Redirect, useRouter } from "expo-router";
 import { Image, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function OnboardingScreen() {
+  const { isLoaded, isSignedIn } = useAuth();
   const router = useRouter();
+
+  if (!isLoaded) {
+    return null;
+  }
+
+  if (isSignedIn) {
+    return <Redirect href="/" />;
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#ffffff" }}>

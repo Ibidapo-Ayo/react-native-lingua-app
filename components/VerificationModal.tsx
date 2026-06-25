@@ -1,22 +1,25 @@
-import { useRouter } from "expo-router";
 import { useEffect, useRef, useState } from "react";
 import {
-    Dimensions,
-    Keyboard,
-    KeyboardAvoidingView,
-    Modal,
-    Platform,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    TouchableWithoutFeedback,
-    View,
+  Dimensions,
+  Keyboard,
+  KeyboardAvoidingView,
+  Modal,
+  Platform,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
 } from "react-native";
 
 interface VerificationModalProps {
   visible: boolean;
   onClose: () => void;
   email: string;
+  onSubmitCode: (code: string) => Promise<void> | void;
+  onResend: () => Promise<void> | void;
+  loading?: boolean;
+  errorMessage?: string;
 }
 
 const CODE_LENGTH = 6;
@@ -27,10 +30,14 @@ export default function VerificationModal({
   visible,
   onClose,
   email,
+  onSubmitCode,
+  onResend,
+  loading = false,
+  errorMessage,
 }: VerificationModalProps) {
-  const router = useRouter();
   const [code, setCode] = useState<string[]>(Array(CODE_LENGTH).fill(""));
   const inputRefs = useRef<(TextInput | null)[]>([]);
+  const isSubmittingRef = useRef(false);
 
   useEffect(() => {
     if (visible) {
@@ -52,8 +59,7 @@ export default function VerificationModal({
       }
       setCode(newCode);
       if (digits.length === CODE_LENGTH) {
-        Keyboard.dismiss();
-        navigateHome();
+        void submitCode(digits);
       } else {
         inputRefs.current[digits.length]?.focus();
       }
@@ -70,8 +76,7 @@ export default function VerificationModal({
     if (text && index === CODE_LENGTH - 1) {
       const fullCode = newCode.join("");
       if (fullCode.length === CODE_LENGTH) {
-        Keyboard.dismiss();
-        navigateHome();
+        void submitCode(fullCode);
       }
     }
   };
@@ -85,11 +90,19 @@ export default function VerificationModal({
     }
   };
 
-  const navigateHome = () => {
-    setTimeout(() => {
-      onClose();
-      router.replace("/");
-    }, 300);
+  const submitCode = async (fullCode: string) => {
+    if (isSubmittingRef.current || loading || fullCode.length !== CODE_LENGTH) {
+      return;
+    }
+
+    isSubmittingRef.current = true;
+    Keyboard.dismiss();
+
+    try {
+      await onSubmitCode(fullCode);
+    } finally {
+      isSubmittingRef.current = false;
+    }
   };
 
   return (
@@ -150,12 +163,20 @@ export default function VerificationModal({
                 <Text className="text-body-md text-text-secondary">
                   Didn't receive the code?{" "}
                 </Text>
-                <TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => void onResend()}
+                  disabled={loading}
+                >
                   <Text className="text-body-md text-purple font-poppins-semibold">
                     Resend
                   </Text>
                 </TouchableOpacity>
               </View>
+              {errorMessage ? (
+                <Text className="text-caption text-error text-center mt-3">
+                  {errorMessage}
+                </Text>
+              ) : null}
             </View>
           </KeyboardAvoidingView>
         </View>
