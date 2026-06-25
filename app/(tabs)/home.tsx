@@ -111,7 +111,11 @@ export default function HomeScreen() {
     <SafeAreaView style={{ flex: 1, backgroundColor: "#FFFFFF" }}>
       <ScrollView
         className="flex-1"
-        contentContainerStyle={{ paddingHorizontal: 16, paddingTop: 10, paddingBottom: 18 }}
+        contentContainerStyle={{
+          paddingHorizontal: 16,
+          paddingTop: 10,
+          paddingBottom: 18,
+        }}
         showsVerticalScrollIndicator={false}
       >
         <View className="flex-row items-center justify-between">
@@ -147,7 +151,11 @@ export default function HomeScreen() {
               accessibilityRole="button"
               accessibilityLabel="Notifications"
             >
-              <Ionicons name="notifications-outline" size={22} color="#3E4469" />
+              <Ionicons
+                name="notifications-outline"
+                size={22}
+                color="#3E4469"
+              />
             </TouchableOpacity>
           </View>
         </View>
@@ -217,7 +225,13 @@ export default function HomeScreen() {
           <Image
             source={images.palace}
             resizeMode="contain"
-            style={{ position: "absolute", right: -12, bottom: 0, width: 126, height: 114 }}
+            style={{
+              position: "absolute",
+              right: -12,
+              bottom: 0,
+              width: 126,
+              height: 114,
+            }}
           />
         </View>
 
@@ -239,11 +253,7 @@ export default function HomeScreen() {
                 className="h-11 w-11 items-center justify-center rounded-2xl"
                 style={{ backgroundColor: item.color }}
               >
-                <Ionicons
-                  name={item.icon}
-                  size={20}
-                  color="#FFFFFF"
-                />
+                <Ionicons name={item.icon} size={20} color="#FFFFFF" />
               </View>
 
               <View className="ml-3.5 flex-1">
