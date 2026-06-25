@@ -256,7 +256,7 @@ export default function SignInScreen() {
 
             <View className="flex-row items-center justify-center py-4">
               <Text className="text-body-md text-text-secondary">
-                Don't have an account?{" "}
+                 Don&apos;t have an account?{" "}
               </Text>
               <TouchableOpacity
                 onPress={() => router.replace("/(auth)/sign-up")}

@@ -34,6 +34,14 @@ export default function Index() {
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
+        className="mt-4 rounded-2xl border-2 border-deep-purple px-8 py-4"
+        onPress={() => router.push("/language")}
+      >
+        <Text className="font-poppins-semibold text-body-lg text-deep-purple">
+          Choose Language
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
         className="mt-4 rounded-2xl border-2 border-purple px-8 py-4"
         onPress={handleSignOut}
       >
