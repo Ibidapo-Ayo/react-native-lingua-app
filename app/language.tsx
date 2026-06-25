@@ -6,6 +6,7 @@ import { useRouter } from "expo-router";
 import { useMemo, useState } from "react";
 import {
   Image,
+  Platform,
   Text,
   TextInput,
   TouchableOpacity,
@@ -21,6 +22,7 @@ const LANGUAGE_LEARNERS: Record<string, string> = {
 };
 
 const EARTH_IMAGE_HEIGHT_RATIO = 0.5;
+const USE_FLAG_IMAGE_FALLBACK = Platform.OS === "android";
 
 function getFlagEmoji(flagCode: string): string {
   return String.fromCodePoint(
@@ -29,6 +31,10 @@ function getFlagEmoji(flagCode: string): string {
       .split("")
       .map((char) => 127397 + char.charCodeAt(0)),
   );
+}
+
+function getFlagImageUri(flagCode: string): string {
+  return `https://flagcdn.com/w80/${flagCode.toLowerCase()}.png`;
 }
 
 export default function LanguageScreen() {
@@ -114,9 +120,17 @@ export default function LanguageScreen() {
                   accessibilityLabel={`Select ${language.name}`}
                 >
                   <View className="h-11 w-11 items-center justify-center rounded-full border border-border bg-white">
-                    <Text style={{ fontSize: 24 }}>
-                      {getFlagEmoji(language.flagCode)}
-                    </Text>
+                    {USE_FLAG_IMAGE_FALLBACK ? (
+                      <Image
+                        source={{ uri: getFlagImageUri(language.flagCode) }}
+                        style={{ height: 24, width: 24, borderRadius: 12 }}
+                        resizeMode="cover"
+                      />
+                    ) : (
+                      <Text style={{ fontSize: 24 }}>
+                        {getFlagEmoji(language.flagCode)}
+                      </Text>
+                    )}
                   </View>
 
                   <View className="ml-4 flex-1">
