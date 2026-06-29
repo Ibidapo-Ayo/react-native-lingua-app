@@ -8,7 +8,14 @@ export const UNITS: LearningUnit[] = [
     description: "Greetings, simple introductions, and polite expressions.",
     order: 1,
     cefrLevel: "A1",
-    lessonIds: ["es-l1-hello", "es-l2-introductions"],
+    lessonIds: [
+      "es-l1-hello",
+      "es-l2-introductions",
+      "es-l3-cafe",
+      "es-l4-travel",
+      "es-l5-shopping",
+      "es-l6-family",
+    ],
   },
   {
     id: "fr-a1-basics",

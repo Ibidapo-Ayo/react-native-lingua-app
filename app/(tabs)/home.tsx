@@ -3,9 +3,10 @@ import { SUPPORTED_LANGUAGES } from "@/data/languages";
 import { LESSONS } from "@/data/lessons";
 import { UNITS } from "@/data/units";
 import { useLanguageStore } from "@/store/language-store";
-import { useUser } from "@clerk/clerk-expo";
+import { useAuth, useUser } from "@clerk/clerk-expo";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+import { useState } from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -28,8 +29,26 @@ const GREETINGS: Record<string, string> = {
 
 export default function HomeScreen() {
   const router = useRouter();
+  const { signOut } = useAuth();
   const { user } = useUser();
   const { hasHydrated, selectedLanguageId } = useLanguageStore();
+  const [isSigningOut, setIsSigningOut] = useState(false);
+
+  const handleSignOut = async () => {
+    if (isSigningOut) {
+      return;
+    }
+
+    setIsSigningOut(true);
+
+    try {
+      await signOut();
+      router.replace("/onboarding");
+    } catch (error) {
+      console.error("Unable to sign out", error);
+      setIsSigningOut(false);
+    }
+  };
 
   if (!hasHydrated) {
     return null;
@@ -156,6 +175,16 @@ export default function HomeScreen() {
                 size={22}
                 color="#3E4469"
               />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              className="h-8 w-8 items-center justify-center"
+              accessibilityRole="button"
+              accessibilityLabel="Log out"
+              disabled={isSigningOut}
+              onPress={handleSignOut}
+            >
+              <Ionicons name="log-out-outline" size={22} color="#3E4469" />
             </TouchableOpacity>
           </View>
         </View>

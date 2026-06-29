@@ -191,6 +191,361 @@ export const LESSONS: Lesson[] = [
     },
   },
   {
+    id: "es-l3-cafe",
+    languageId: "spanish",
+    unitId: "es-a1-basics",
+    title: "At the Cafe",
+    description: "Order a drink and speak politely in a cafe.",
+    order: 3,
+    estimatedMinutes: 9,
+    xpReward: 14,
+    goals: [
+      { id: "es-l3-g1", text: "Order a coffee politely." },
+      { id: "es-l3-g2", text: "Ask for the bill in Spanish." },
+    ],
+    vocabulary: [
+      {
+        id: "es-v-cafe",
+        term: "cafe",
+        translation: "coffee",
+        pronunciation: "kah-FEH",
+        example: "Un cafe, por favor.",
+      },
+      {
+        id: "es-v-cuenta",
+        term: "la cuenta",
+        translation: "the bill",
+        pronunciation: "lah KWEHN-tah",
+        example: "La cuenta, por favor.",
+      },
+      {
+        id: "es-v-quiero",
+        term: "quiero",
+        translation: "I want",
+        pronunciation: "kee-EH-roh",
+        example: "Quiero un te.",
+      },
+    ],
+    phrases: [
+      {
+        id: "es-p-5",
+        text: "Quiero un cafe, por favor.",
+        translation: "I want a coffee, please.",
+      },
+      {
+        id: "es-p-6",
+        text: "La cuenta, por favor.",
+        translation: "The bill, please.",
+      },
+    ],
+    activities: [
+      {
+        id: "es-l3-a1",
+        type: "vocabulary",
+        instruction: "Match cafe words with meanings.",
+        items: [
+          {
+            id: "es-v-cafe",
+            term: "cafe",
+            translation: "coffee",
+            pronunciation: "kah-FEH",
+            example: "Un cafe, por favor.",
+          },
+          {
+            id: "es-v-cuenta",
+            term: "la cuenta",
+            translation: "the bill",
+            pronunciation: "lah KWEHN-tah",
+            example: "La cuenta, por favor.",
+          },
+        ],
+      },
+      {
+        id: "es-l3-a2",
+        type: "speaking",
+        instruction: "Practice your cafe order.",
+        prompt: "Say: Quiero un cafe, por favor.",
+        expectedKeywords: ["quiero", "cafe", "por favor"],
+      },
+    ],
+    aiTeacherPrompt: {
+      role: "Spanish cafe conversation coach",
+      systemPrompt:
+        "Practice simple cafe roleplay with one short correction each turn.",
+      openingLine: "Bien. We are in a cafe. What do you want to drink?",
+      focusAreas: ["ordering", "politeness", "pronunciation"],
+      correctionStyle: "balanced",
+      shortReplyExamples: [
+        {
+          learnerInput: "Quiero cafe",
+          teacherReply: "Nice. Add article: Quiero un cafe.",
+        },
+      ],
+    },
+  },
+  {
+    id: "es-l4-travel",
+    languageId: "spanish",
+    unitId: "es-a1-basics",
+    title: "Travel and Directions",
+    description: "Ask where places are and understand short directions.",
+    order: 4,
+    estimatedMinutes: 10,
+    xpReward: 14,
+    goals: [
+      { id: "es-l4-g1", text: "Ask where a place is." },
+      { id: "es-l4-g2", text: "Understand left and right directions." },
+    ],
+    vocabulary: [
+      {
+        id: "es-v-donde",
+        term: "donde esta",
+        translation: "where is",
+        pronunciation: "DOHN-deh ehs-TAH",
+        example: "Donde esta el hotel?",
+      },
+      {
+        id: "es-v-izquierda",
+        term: "izquierda",
+        translation: "left",
+        pronunciation: "ees-kee-EHR-dah",
+        example: "A la izquierda.",
+      },
+      {
+        id: "es-v-derecha",
+        term: "derecha",
+        translation: "right",
+        pronunciation: "deh-REH-chah",
+        example: "A la derecha.",
+      },
+    ],
+    phrases: [
+      {
+        id: "es-p-7",
+        text: "Donde esta el hotel?",
+        translation: "Where is the hotel?",
+      },
+      {
+        id: "es-p-8",
+        text: "Sigue recto.",
+        translation: "Go straight.",
+      },
+    ],
+    activities: [
+      {
+        id: "es-l4-a1",
+        type: "translation",
+        instruction: "Translate into Spanish.",
+        prompts: [
+          {
+            id: "es-l4-t1",
+            from: "where is the station",
+            to: "donde esta la estacion",
+          },
+          { id: "es-l4-t2", from: "go right", to: "a la derecha" },
+        ],
+      },
+      {
+        id: "es-l4-a2",
+        type: "listening",
+        instruction: "Listen and choose direction.",
+        sourceText: "A la izquierda.",
+        expectedResponse: "left",
+      },
+    ],
+    aiTeacherPrompt: {
+      role: "Spanish travel helper",
+      systemPrompt:
+        "Keep direction practice practical and short. Ask one travel question at a time.",
+      openingLine: "Vamos a viajar. Donde esta la estacion?",
+      focusAreas: ["directions", "questions", "travel"],
+      correctionStyle: "balanced",
+      shortReplyExamples: [
+        {
+          learnerInput: "A derecha",
+          teacherReply: "Close. Say: A la derecha.",
+        },
+      ],
+    },
+  },
+  {
+    id: "es-l5-shopping",
+    languageId: "spanish",
+    unitId: "es-a1-basics",
+    title: "Shopping",
+    description: "Ask prices and buy common items.",
+    order: 5,
+    estimatedMinutes: 10,
+    xpReward: 15,
+    goals: [
+      { id: "es-l5-g1", text: "Ask how much something costs." },
+      { id: "es-l5-g2", text: "Say what you want to buy." },
+    ],
+    vocabulary: [
+      {
+        id: "es-v-cuanto",
+        term: "cuanto cuesta",
+        translation: "how much is it",
+        pronunciation: "KWAHN-toh KWEHS-tah",
+        example: "Cuanto cuesta esto?",
+      },
+      {
+        id: "es-v-quiero-comprar",
+        term: "quiero comprar",
+        translation: "I want to buy",
+        pronunciation: "kee-EH-roh kohm-PRAHR",
+        example: "Quiero comprar pan.",
+      },
+    ],
+    phrases: [
+      {
+        id: "es-p-9",
+        text: "Cuanto cuesta esto?",
+        translation: "How much is this?",
+      },
+      {
+        id: "es-p-10",
+        text: "Quiero comprar una camisa.",
+        translation: "I want to buy a shirt.",
+      },
+    ],
+    activities: [
+      {
+        id: "es-l5-a1",
+        type: "phrase_practice",
+        instruction: "Read and repeat shopping phrases.",
+        phrases: [
+          {
+            id: "es-p-9",
+            text: "Cuanto cuesta esto?",
+            translation: "How much is this?",
+          },
+          {
+            id: "es-p-10",
+            text: "Quiero comprar una camisa.",
+            translation: "I want to buy a shirt.",
+          },
+        ],
+      },
+      {
+        id: "es-l5-a2",
+        type: "speaking",
+        instruction: "Ask for a price naturally.",
+        prompt: "Say: Cuanto cuesta esto?",
+        expectedKeywords: ["cuanto", "cuesta", "esto"],
+      },
+    ],
+    aiTeacherPrompt: {
+      role: "Spanish shopping tutor",
+      systemPrompt:
+        "Simulate quick store interactions. Keep wording simple and useful for beginners.",
+      openingLine: "Hola. You are in a shop. Ask me the price.",
+      focusAreas: ["prices", "shopping", "confidence"],
+      correctionStyle: "gentle",
+      shortReplyExamples: [
+        {
+          learnerInput: "Cuanto esto",
+          teacherReply: "Good try. Say: Cuanto cuesta esto?",
+        },
+      ],
+    },
+  },
+  {
+    id: "es-l6-family",
+    languageId: "spanish",
+    unitId: "es-a1-basics",
+    title: "Family and Friends",
+    description: "Talk about your family and close friends.",
+    order: 6,
+    estimatedMinutes: 10,
+    xpReward: 15,
+    goals: [
+      { id: "es-l6-g1", text: "Say who is in your family." },
+      { id: "es-l6-g2", text: "Describe a friend with simple words." },
+    ],
+    vocabulary: [
+      {
+        id: "es-v-familia",
+        term: "familia",
+        translation: "family",
+        pronunciation: "fah-MEE-lee-ah",
+        example: "Mi familia es grande.",
+      },
+      {
+        id: "es-v-amigo",
+        term: "amigo",
+        translation: "friend",
+        pronunciation: "ah-MEE-goh",
+        example: "Mi amigo es muy amable.",
+      },
+      {
+        id: "es-v-hermana",
+        term: "hermana",
+        translation: "sister",
+        pronunciation: "ehr-MAH-nah",
+        example: "Tengo una hermana.",
+      },
+    ],
+    phrases: [
+      {
+        id: "es-p-11",
+        text: "Tengo una hermana.",
+        translation: "I have a sister.",
+      },
+      {
+        id: "es-p-12",
+        text: "Mi amigo es divertido.",
+        translation: "My friend is fun.",
+      },
+    ],
+    activities: [
+      {
+        id: "es-l6-a1",
+        type: "vocabulary",
+        instruction: "Match family words to English.",
+        items: [
+          {
+            id: "es-v-familia",
+            term: "familia",
+            translation: "family",
+            pronunciation: "fah-MEE-lee-ah",
+            example: "Mi familia es grande.",
+          },
+          {
+            id: "es-v-hermana",
+            term: "hermana",
+            translation: "sister",
+            pronunciation: "ehr-MAH-nah",
+            example: "Tengo una hermana.",
+          },
+        ],
+      },
+      {
+        id: "es-l6-a2",
+        type: "translation",
+        instruction: "Translate into Spanish.",
+        prompts: [
+          { id: "es-l6-t1", from: "my family", to: "mi familia" },
+          { id: "es-l6-t2", from: "my friend", to: "mi amigo" },
+        ],
+      },
+    ],
+    aiTeacherPrompt: {
+      role: "Spanish family-topic practice partner",
+      systemPrompt:
+        "Help the learner describe family members using short A1 phrases.",
+      openingLine: "Hablemos de tu familia. Quien es tu mejor amigo?",
+      focusAreas: ["family", "friends", "simple description"],
+      correctionStyle: "gentle",
+      shortReplyExamples: [
+        {
+          learnerInput: "Mi familia grande",
+          teacherReply: "Nice idea. Say: Mi familia es grande.",
+        },
+      ],
+    },
+  },
+  {
     id: "fr-l1-hello",
     languageId: "french",
     unitId: "fr-a1-basics",
