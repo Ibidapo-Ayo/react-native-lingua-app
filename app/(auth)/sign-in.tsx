@@ -1,8 +1,8 @@
 import PrimaryButton from "@/components/PrimaryButton";
 import VerificationModal from "@/components/VerificationModal";
 import { images } from "@/constants/images";
-import { Ionicons } from "@expo/vector-icons";
 import { useSignIn, useSSO } from "@clerk/clerk-expo";
+import { Ionicons } from "@expo/vector-icons";
 import * as Linking from "expo-linking";
 import { useRouter } from "expo-router";
 import * as WebBrowser from "expo-web-browser";
@@ -31,6 +31,7 @@ export default function SignInScreen() {
   const { startSSOFlow } = useSSO();
 
   const [email, setEmail] = useState("");
+  const [emailAddressId, setEmailAddressId] = useState<string | null>(null);
   const [showVerification, setShowVerification] = useState(false);
   const [emailError, setEmailError] = useState("");
   const [verificationError, setVerificationError] = useState("");
@@ -38,6 +39,8 @@ export default function SignInScreen() {
   const isLoading = !isLoaded;
 
   const handleSignIn = async () => {
+    if (!isLoaded || !signIn) return;
+
     const trimmed = email.trim();
     if (!trimmed || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
       setEmailError("Please enter a valid email address");
@@ -47,20 +50,37 @@ export default function SignInScreen() {
     setEmailError("");
     setVerificationError("");
 
-    const { error } = await signIn.create({
-      identifier: trimmed,
-      strategy: "email_code",
-    });
+    try {
+      const signInAttempt = await signIn.create({
+        identifier: trimmed,
+      });
 
-    if (error) {
-      setEmailError(error.message || "Unable to sign in. Please try again.");
-      return;
+      const emailCodeFactor = signInAttempt.supportedFirstFactors?.find(
+        (factor) => factor.strategy === "email_code",
+      );
+
+      if (!emailCodeFactor || !("emailAddressId" in emailCodeFactor)) {
+        setEmailError("Email verification is not available for this account.");
+        return;
+      }
+
+      await signIn.prepareFirstFactor({
+        strategy: "email_code",
+        emailAddressId: emailCodeFactor.emailAddressId,
+      });
+
+      setEmailAddressId(emailCodeFactor.emailAddressId);
+      setShowVerification(true);
+    } catch (err: any) {
+      setEmailError(
+        err?.errors?.[0]?.longMessage ||
+          err?.errors?.[0]?.message ||
+          "Unable to sign in. Please try again.",
+      );
     }
-
-    setShowVerification(true);
   };
   const handleVerifyCode = async (code: string) => {
-    if (!isLoaded) return;
+    if (!isLoaded || !signIn || !setActive) return;
 
     setVerificationError("");
 
@@ -71,7 +91,7 @@ export default function SignInScreen() {
       });
 
       if (result.status === "complete") {
-        await setActive!({
+        await setActive({
           session: result.createdSessionId,
         });
 
@@ -90,9 +110,12 @@ export default function SignInScreen() {
   };
 
   const handleResendCode = async () => {
+    if (!isLoaded || !signIn || !emailAddressId) return;
+
     try {
       await signIn.prepareFirstFactor({
         strategy: "email_code",
+        emailAddressId,
       });
 
       setVerificationError("");
@@ -256,7 +279,7 @@ export default function SignInScreen() {
 
             <View className="flex-row items-center justify-center py-4">
               <Text className="text-body-md text-text-secondary">
-                 Don&apos;t have an account?{" "}
+                Don&apos;t have an account?{" "}
               </Text>
               <TouchableOpacity
                 onPress={() => router.replace("/(auth)/sign-up")}

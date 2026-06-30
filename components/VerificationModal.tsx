@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import {
-  Dimensions,
-  Keyboard,
-  KeyboardAvoidingView,
-  Modal,
-  Platform,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  View,
+    Dimensions,
+    Keyboard,
+    KeyboardAvoidingView,
+    Modal,
+    Platform,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    TouchableWithoutFeedback,
+    View,
 } from "react-native";
 
 interface VerificationModalProps {
@@ -117,7 +117,7 @@ export default function VerificationModal({
               <View className="items-center mb-6">
                 <Text className="text-h2 mb-2">Verify your email</Text>
                 <Text className="text-body-md text-text-secondary text-center">
-                  We've sent a verification code to{"\n"}
+                  We&apos;ve sent a verification code to{"\n"}
                   <Text className="text-text-primary font-poppins-medium">
                     {email || "your email"}
                   </Text>
@@ -161,7 +161,7 @@ export default function VerificationModal({
               {/* Resend */}
               <View className="flex-row items-center justify-center">
                 <Text className="text-body-md text-text-secondary">
-                  Didn't receive the code?{" "}
+                  Didn&apos;t receive the code?{" "}
                 </Text>
                 <TouchableOpacity
                   onPress={() => void onResend()}

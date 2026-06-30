@@ -1,4 +1,4 @@
-Read AGENTS.md first and follow it strictly.
+ImpRead AGENTS.md first and follow it strictly.
 
 Implement the language selection screen UI based on the attached design. Use the hardcoded languages from `data/languages.ts` and the existing NativeWind/global.css design utilities.
 
