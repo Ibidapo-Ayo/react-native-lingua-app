@@ -139,11 +139,22 @@ export default function LearnScreen() {
               </Text>
             </View>
 
-            <View className="h-9 min-w-14 items-center justify-center rounded-full border border-[#E4E8F3] bg-white px-2.5">
+            <TouchableOpacity
+              className="h-9 min-w-14 flex-row items-center justify-center rounded-full border border-[#E4E8F3] bg-white px-2.5"
+              onPress={() => router.push("/language")}
+              accessibilityRole="button"
+              accessibilityLabel="Choose language"
+            >
               <Text style={{ fontSize: 16 }}>
                 {getFlagEmoji(selectedLanguage.flagCode)}
               </Text>
-            </View>
+              <Ionicons
+                name="swap-horizontal"
+                size={13}
+                color="#5C46F6"
+                style={{ marginLeft: 5 }}
+              />
+            </TouchableOpacity>
           </View>
         </View>
 

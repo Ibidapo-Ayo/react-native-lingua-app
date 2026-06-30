@@ -139,11 +139,19 @@ export default function HomeScreen() {
       >
         <View className="flex-row items-center justify-between">
           <View className="flex-row items-center">
-            <View className="h-10 w-10 items-center justify-center rounded-full border border-[#ECECF1] bg-white">
+            <TouchableOpacity
+              className="relative h-10 w-10 items-center justify-center rounded-full border border-[#ECECF1] bg-white"
+              onPress={() => router.push("/language")}
+              accessibilityRole="button"
+              accessibilityLabel="Choose language"
+            >
               <Text style={{ fontSize: 23 }}>
                 {getFlagEmoji(selectedLanguage.flagCode)}
               </Text>
-            </View>
+              <View className="absolute -bottom-1 -right-1 h-5 w-5 items-center justify-center rounded-full border-2 border-white bg-[#5B45F6]">
+                <Ionicons name="globe-outline" size={11} color="#FFFFFF" />
+              </View>
+            </TouchableOpacity>
 
             <Text
               className="ml-3 max-w-[205px] text-[14px] font-poppins-semibold text-[#1E2344]"
